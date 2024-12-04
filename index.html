@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dementia Detection using AI and Machine Learning">
+    <meta name="keywords" content="Dementia, AI, Machine Learning, Flask">
+    <meta name="author" content="Your Name">
+    <title>Dementia Detection</title>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="">Alzheimer Detection using AI</h1>
+        </header>
+        
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+            <label for="image">Upload MRI Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <button type="submit" id="predictButton" class="Predict_button">Predict</button>
+        </form>
+
+        <div id="result">
+            {% if result %}
+                <h2>Prediction Result</h2>
+                <p>Class: {{ result[0] }}</p>
+                <p>{{ result[1] }}</p>
+            {% endif %}
+        </div>
+
+        {% if image %}
+            <div id="image-preview">
+                <h2>Uploaded Image Preview</h2>
+                <img src="{{ url_for('static', filename='uploads/' + image) }}" alt="Uploaded MRI Image">
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Loader element to show while processing -->
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
